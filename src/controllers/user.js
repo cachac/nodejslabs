@@ -1,4 +1,4 @@
-import { logger } from "../util/log.js";
+import { logger } from "../util/logv1.js";
 
 export const TEST = async (req, res, next) => {
   try {

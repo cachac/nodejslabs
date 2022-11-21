@@ -1,5 +1,8 @@
 import winston, { createLogger, format } from "winston";
 import { sticky } from "./sticky.js";
+import config from "../config/index.js";
+
+const appLabel = `${config.APP_NAME}(${config.APP_VERSION})-${sticky}`;
 
 const { combine, timestamp, label, metadata, printf } = format;
 
@@ -32,7 +35,7 @@ const logFormat = printf(
 export const logger = createLogger({
   level: "info",
   format: combine(
-    label({ label: sticky }),
+    label({ label: appLabel }),
     timestamp({ format: "YYYY-MM-DD HH:mm:ss" }),
     metadata({ fillExcept: ["message", "level", "timestamp", "label"] }),
     logFormat
@@ -47,7 +50,7 @@ export const logger = createLogger({
 logger.add(
   new winston.transports.Console({
     format: combine(
-      label({ label: sticky }),
+      label({ label: appLabel }),
       timestamp({ format: "YYYY-MM-DD HH:mm:ss" })
       // logFormat
     ),

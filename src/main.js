@@ -5,7 +5,8 @@ import compression from "compression";
 import routes from "./routes/index.js";
 // import { errorHandlers } from "./middlewares/basicErrorHandlers.js";
 import { errorHandlers } from "./middlewares/errorHandlers.js";
-import { logger } from "./util/log.js";
+import { logger } from "./util/logv1.js";
+import config from "./config/index.js";
 
 const app = express();
 
@@ -27,7 +28,10 @@ process.on("unhandledRejection", (err) => {
   process.exit(1);
 });
 
-const NODE_PORT = 3000;
-app.listen(NODE_PORT, () => {
-  logger.info(`Listening to port ${NODE_PORT} - Express JS | REST API`);
+app.listen(config.NODE_PORT, () => {
+  logger.info(`Listening to port ${config.NODE_PORT} - Express JS | REST API`);
 });
+
+// console.log(
+//   `[${config.NODE_ENV}] App: ${config.APP_NAME} v${config.APP_VERSION} listening to port ${config.NODE_PORT} - Express JS | REST`
+// );
