@@ -1,0 +1,33 @@
+config:
+  target: "http://localhost:3001"
+
+  phases:
+    - name: Basic
+      duration: 5
+      arrivalRate: 1
+
+before:
+  flow:
+    - log: "Get auth token"
+
+    - post:
+        url: "/user/JWT"
+        json:
+          username: "carlos@mail.com"
+          password: "11111111"
+        capture:
+          - json: $.accessToken
+            as: token
+    - log: "Access Token: {{ token }}"
+
+scenarios:
+  - name: "Read All posts"
+    flow:
+      - get:
+          url: "/post/readAll"
+          # headers:
+          #   Authorization: 'Bearer {{ token }}'
+          cookie:
+            "access-token": "{{ token }}"
+          expect:
+            - statusCode: 200

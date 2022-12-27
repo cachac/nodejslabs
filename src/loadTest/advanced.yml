@@ -1,0 +1,58 @@
+config:
+  target: "http://localhost:3001"
+  plugins:
+    expect: {}
+
+  ensure:
+    p95: 200 # percentil95 < 200ms; para ser satisfactorio.
+    maxErrorRate: 5 # porcentaje maximo de errores = escenarios no terminados.
+  phases:
+    - duration: 3
+      arrivalRate: 20
+      name: "Warming up"
+    - duration: 240
+      arrivalRate: 20
+      rampTo: 100
+      name: "Ramping up"
+    - duration: 500
+      arrivalRate: 100
+      name: "Sustained load"
+  variables:
+    username: "carlos@mail.com"
+    password: "11111111"
+
+before:
+  flow:
+    - log: "Get auth token"
+
+    - post:
+        url: "/user/JWT"
+        json:
+          username: "{{ username }}"
+          password: "{{ password }}"
+        capture:
+          - json: $.accessToken
+            as: token
+    - log: "Access Token: {{ token }}"
+
+scenarios:
+  - name: "Read All posts"
+    flow:
+      - get:
+          url: "/post/readAll"
+          cookie:
+            "access-token": "{{ token }}"
+          # json:
+          #   title: "post title"
+          #   author: "Artillery"
+          #   body: "Load testing post"
+          expect:
+            - statusCode: 200
+            # - contentType: json
+            # - hasProperty: _id
+      #     capture:
+      #       - json: $._id
+      #         as: _id
+      # - log: "Post _id: {{ _id }}"
+      # - log: "----------------------------------"
+      # - log: "Sent a request"
