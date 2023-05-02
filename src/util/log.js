@@ -1,4 +1,5 @@
 import winston, { createLogger, format } from "winston";
+import { sticky } from "./sticky.js";
 
 const { combine, timestamp, label, metadata, printf } = format;
 
@@ -31,7 +32,7 @@ const logFormat = printf(
 export const logger = createLogger({
   level: "debug",
   format: combine(
-    label({ label: "APP_NAME" }),
+    label({ label: `DEMO-APP-${sticky}` }),
     timestamp({ format: "YYYY-MM-DD HH:mm:ss" }),
     metadata({ fillExcept: ["message", "level", "timestamp", "label"] }),
     logFormat
