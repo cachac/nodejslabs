@@ -1,6 +1,6 @@
 import winston, { createLogger, format } from "winston";
 import { sticky } from "./sticky.js";
-import config from "./config/index.js";
+import config from "../config/index.js";
 
 const { combine, timestamp, label, metadata, printf } = format;
 
