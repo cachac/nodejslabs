@@ -1,6 +1,7 @@
 import express from "express";
 import { sticky } from "../util/sticky.js";
 import { TEST } from "../controllers/user.js";
+import * as post from "../controllers/post.js";
 
 const router = express.Router();
 
@@ -12,5 +13,12 @@ router.get("/healthcheck", (_, res) => {
 });
 
 router.post("/test", TEST);
+
+// POST CRUD
+router.post("/post/create", post.CREATE);
+router.get("/post/readall", post.READ_ALL);
+router.post("/post/readbyid", post.READ_BY_ID);
+router.post("/post/delete", post.DELETE);
+router.post("/post/update", post.UPDATE);
 
 export default router;
