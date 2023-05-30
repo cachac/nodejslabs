@@ -47,7 +47,9 @@ npm audit
 
 # 6. npm-check
 npm outdated
+
 npm npm-check -u
+
 npm install
 > fail
 
@@ -71,6 +73,7 @@ script:
 ```
 
 npm i
+
 npm audit
 > 40 vulnerabilities (1 low, 11 moderate, 16 high, 12 critical)
 
@@ -83,6 +86,7 @@ npm run dev
 },
 
 npm i
+
 npm audit
 > 39 vulnerabilities (1 low, 11 moderate, 15 high, 12 critical)
 
@@ -116,8 +120,11 @@ npm run dev
 
 # 12. hard reset
 delete node_modules & lock
+
 npm i
+
 npm audit
+
 npm run dev
 
 > new vulnerabilites
