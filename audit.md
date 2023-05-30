@@ -1,27 +1,34 @@
 # 1. use notus template
 node 16
+
 npm i
 
 npm run dev
+
 browser: localhost:3000
 
 # 2. auto fix
 npm audit
+
 > 47 vulnerabilities (1 low, 10 moderate, 24 high, 12 critical)
 
 check:
 nth-check  <2.0.1
+
 Severity: high
 
 
 npm audit fix
+
 > 29 vulnerabilities (14 moderate, 11 high, 4 critical)
+
 npm run dev
 > Error: Next.js requires react >= 18.2.0 to be installed.
 
 
 # 3. reset
 delete node_modules
+
 delete package-lock.json
 
 # 4. install
@@ -33,6 +40,7 @@ npm i
 
 # 5. restore package.json and install
 npm run dev
+
 npm audit
 > 47 vulnerabilities (1 low, 10 moderate, 24 high, 12 critical)
 
