@@ -88,7 +88,7 @@ export const UPDATE = async (req, res, next) => {
         ...input,
         $push: {
           bitacora: {
-            user: input.cachac,
+            user: input.username,
             date: new Date(),
             detail: input.detail,
           },
