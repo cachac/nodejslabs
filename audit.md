@@ -1,6 +1,8 @@
 # 1. use notus template
 node 16
 
+cd audit-test
+
 npm i
 
 npm run dev
@@ -165,6 +167,7 @@ npm run dev
     "browserslist": "4.16.5",
     "postcss": "7.0.36",
     "yaml": "2.2.2",
+    "semver": "7.5.2",
     "next": "12.1.0"
   },
 ```
