@@ -20,14 +20,20 @@ export default {
       logger.info("Database connected");
     });
 
-    return mongoose.connect(connectionString, {
-      connectTimeoutMS: 5000,
-      maxPoolSize: 100,
-      writeConcern: {
-        w: "majority",
-        j: true,
-        wtimeout: 5000,
-      },
-    });
+    return mongoose
+      .connect(connectionString, {
+        connectTimeoutMS: 5000,
+        maxPoolSize: 100,
+        writeConcern: {
+          w: "majority",
+          j: true,
+          wtimeout: 5000,
+        },
+      })
+      .catch((error) => {
+        console.log("DB Connection error 💥", error);
+
+        process.exit(1);
+      });
   },
 };
