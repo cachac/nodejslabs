@@ -82,7 +82,7 @@
   "eslintConfig": {
     "parserOptions": {
       "parser": "babel-eslint",
-      "ecmaVersion": 2020,
+      "ecmaVersion": 2023,
       "sourceType": "module"
     },
     "extends": [
@@ -186,10 +186,13 @@
       ]
     }
   },
+  "eslintIgnore": [
+    "node_modules/"
+  ],
   "lint-staged": {
-    "*.{js,jsx,ts,tsx}": [
+    "src/**/*.{js,jsx,ts,tsx}": [
       "prettier --write",
-      "eslint --fix"
+      "eslint --ignore --fix"
     ]
   },
   "jest": {
